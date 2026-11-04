@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DIYORBEK AI</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;font-family:Arial,sans-serif;
+ background:#090d18;color:white;
+ display:flex;justify-content:center;min-height:100vh;
+}
+.app{width:100%;max-width:850px;padding:25px;display:flex;flex-direction:column}
+header{text-align:center;padding:25px}
+header h1{font-size:38px;color:#54a8ff;margin:5px}
+header p{color:#9eabc2}
+#chat{
+ flex:1;min-height:350px;max-height:65vh;overflow-y:auto;
+ padding:15px;background:#111a2b;border:1px solid #263750;
+ border-radius:18px;
+}
+.msg{padding:13px 16px;margin:12px 0;border-radius:14px;max-width:85%;line-height:1.5;white-space:pre-wrap}
+.user{background:#1768bd;margin-left:auto}
+.bot{background:#26344b;margin-right:auto}
+form{display:flex;gap:10px;margin-top:15px}
+textarea{
+ flex:1;resize:none;height:58px;padding:17px;
+ border-radius:14px;border:1px solid #354866;
+ background:#111a2b;color:white;font-size:16px;outline:none
+}
+button{
+ border:0;border-radius:14px;padding:0 22px;
+ background:#2588f5;color:white;font-size:17px;
+ cursor:pointer;font-weight:bold
+}
+button:hover{background:#0870df}
+footer{text-align:center;color:#64748b;font-size:12px;padding:15px}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+<h1>DIYORBEK AI</h1>
+<p>Sun’iy intellekt yordamchingiz</p>
+</header>
+
+<div id="chat">
+<div class="msg bot">Salom! Men DIYORBEK AI. Sizga qanday yordam bera olaman?</div>
+</div>
+
+<form id="form">
+<textarea id="message" placeholder="Xabaringizni yozing..." required></textarea>
+<button type="submit">Yuborish</button>
+</form>
+<footer>DIYORBEK AI © 2026</footer>
+</div>
+
+<script>
+const form=document.getElementById("form");
+const input=document.getElementById("message");
+const chat=document.getElementById("chat");
+
+function javob(matn){
+ const s=matn.toLowerCase();
+ if(s.includes("salom")) return "Salom! Sizga qanday yordam beray?";
+ if(s.includes("isming")) return "Mening ismim DIYORBEK AI.";
+ if(s.includes("kim")) return "Men DIYORBEK AI yordamchisiman.";
+ if(s.includes("rahmat")) return "Arzimaydi! Yana yordam kerak bo‘lsa yozing.";
+ if(s.includes("vaqt")) return "Hozirgi vaqtni qurilmangiz soatidan tekshirishingiz mumkin.";
+ if(s.includes("html")) return "HTML — veb-sahifaning tuzilishini yaratish uchun ishlatiladi.";
+ if(s.includes("kompyuter")) return "Kompyuter bo‘yicha savolingizni aniqroq yozing. Yordam berishga harakat qilaman.";
+ return "Savolingiz qiziqarli! Hozircha men oddiy demo yordamchiman. Bu javob avtomatik tayyorlangan. Haqiqiy AI javoblari uchun alohida AI xizmatiga ulanish kerak.";
+}
+
+form.addEventListener("submit",function(e){
+ e.preventDefault();
+ const text=input.value.trim();
+ if(!text)return;
+
+ const user=document.createElement("div");
+ user.className="msg user";
+ user.textContent=text;
+ chat.appendChild(user);
+
+ const bot=document.createElement("div");
+ bot.className="msg bot";
+ bot.textContent=javob(text);
+ chat.appendChild(bot);
+
+ input.value="";
+ chat.scrollTop=chat.scrollHeight;
+});
+</script>
+</body>
+</html>
